@@ -10,6 +10,7 @@ public class Student {
     private int entYear;       // 入学年度
     private String classNum;   // クラス番号
     private boolean isAttend;  // 在学中かどうか
+    private String schoolcd;
 
     // ゲッターとセッター
 
@@ -52,4 +53,11 @@ public class Student {
     public void setIsAttend(boolean isAttend) {
         this.isAttend = isAttend;
     }
+
+    public String getSchoolcd() {return schoolcd;}
+
+    public void setSchoolcd(String schoolcd) {
+        this.schoolcd = schoolcd;
+    }
+
 }

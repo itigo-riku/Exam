@@ -42,7 +42,7 @@
         <a href="<%= request.getContextPath() %>/disp/index.jsp">メニュー</a>
       </li>
       <li style="margin-bottom: 15px; text-align: left;">
-        <a href="<%= request.getContextPath() %>/action/studentlist">学生管理</a>
+        <a href="<%= request.getContextPath() %>/scoremanager/StudentList.action">学生管理</a>
       </li>
       <div style="margin-bottom: 15px; text-align: left;">成績管理</div>
       <li style="margin-bottom: 15px; text-align: left; padding-left: 30px;">

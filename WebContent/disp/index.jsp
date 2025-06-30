@@ -11,7 +11,7 @@
 
     <ul class="card student">
       <li style="margin-bottom: 15px;">
-        <a href="<%= request.getContextPath() %>/action/studentlist">学生管理</a>
+        <a href="<%= request.getContextPath() %>/scoremanager/StudentList.action">学生管理</a>
       </li>
     </ul>
     <ul class="card score">

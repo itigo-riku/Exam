@@ -50,7 +50,7 @@
 
     <div style="margin-top: 10px;">
       <button type="submit">登録する</button>
-      <a href="<%= request.getContextPath() %>/action/studentlist">戻る</a>
+      <a href="<%= request.getContextPath() %>/scoremanager/StudentList.action">戻る</a>
     </div>
   </form>
 </div>

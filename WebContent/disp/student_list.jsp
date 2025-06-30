@@ -7,13 +7,15 @@
 <div class="content">
   <h2 class="menu-title">学生管理一覧</h2>
 
+
+
   <!-- 絞り込みフォーム -->
-  <form action="studentlist" method="get">
+  <form action="${pageContext.request.contextPath}/scoremanager/StudentList.action" method="get">
     <label>入学年度：</label>
     <select name="ent_year">
       <option value="">--選択--</option>
       <c:forEach var="year" items="${entYears}">
-        <option value="${year}" <c:if test="${param.ent_year == year}">selected</c:if>>${year}</option>
+        <option value="${year}" <c:if test="${param.ent_year == ent_year}">selected</c:if>>${year}</option>
       </c:forEach>
     </select>
 
@@ -56,22 +58,24 @@
     </thead>
     <tbody>
       <c:forEach var="student" items="${students}">
-        <tr>
-          <td>${student.no}</td>
-          <td>${student.name}</td>
-          <td>${student.ent_year}</td>
-          <td>${student.class_num}</td>
-          <td>
-            <c:choose>
-              <c:when test="${student.is_attend == true}">〇</c:when>
-              <c:otherwise>×</c:otherwise>
-            </c:choose>
-          </td>
-          <td><a href="studentupdateform?student_id=${student.no}">変更</a></td>
-        </tr>
-      </c:forEach>
+  <tr>
+    <td>${student["no"]}</td>
+    <td>${student["name"]}</td>
+    <td>${student["ent_year"]}</td>
+    <td>${student["class_num"]}</td>
+    <td>
+      <c:choose>
+        <c:when test="${student['is_attend'] == true}">〇</c:when>
+        <c:otherwise>×</c:otherwise>
+      </c:choose>
+    </td>
+    <td><a href="studentupdateform?student_id=${student['no']}">変更</a></td>
+  </tr>
+</c:forEach>
+
       <c:if test="${empty students}">
         <tr><td colspan="6">該当する学生情報がありません。</td></tr>
+
       </c:if>
     </tbody>
   </table>

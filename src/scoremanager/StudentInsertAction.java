@@ -1,5 +1,7 @@
 package scoremanager;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,10 +29,23 @@ public class StudentInsertAction extends Action {
         String schoolCd = teacher.getSchool_cd();
         StudentDao dao = new StudentDao();
 
-        // ▼ 入学年度・クラスの一覧を取得してセット（JSPで選択肢に使う）
-        List<Integer> entYears = dao.getEntYears(schoolCd);
-        List<String> classNums = dao.getClassNums(schoolCd);
+        // ▼ 入学年度リストを「現在-10年～現在+10年」で生成
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        List<Integer> entYears = new ArrayList<>();
+        for (int y = thisYear - 10; y <= thisYear + 10; y++) {
+            entYears.add(y);
+        }
         request.setAttribute("entYears", entYears);
+
+        // ▼ クラスリスト（DBにクラスマスタない場合は仮で用意）
+        List<String> classNums = dao.getClassNums(schoolCd);
+        if (classNums == null || classNums.isEmpty()) {
+            // クラスが0件ならデフォルト候補を入れる（例）
+            classNums = new ArrayList<>();
+            classNums.add("A");
+            classNums.add("B");
+            classNums.add("C");
+        }
         request.setAttribute("classNums", classNums);
 
         // ▼ 登録処理：POST の場合だけ実行（method 判定）
@@ -48,11 +63,14 @@ public class StudentInsertAction extends Action {
                 student.setEntYear(entYear);
                 student.setClassNum(classNum);
                 student.setIsAttend(isAttend);
-                student.setSchoolcd(schoolCd); // メソッド名注意
+                student.setSchoolcd(schoolCd);
+
+                System.out.println("entYears=" + entYears);
+                System.out.println("classNums=" + classNums);
 
                 dao.insert(student);
 
-                return "scoremanager/StudentList.action";  // 一覧画面に遷移
+                return "/scoremanager/StudentList.action";  // 一覧画面に遷移
 
             } catch (Exception e) {
                 e.printStackTrace();

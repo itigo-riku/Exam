@@ -36,7 +36,7 @@
 
   <!-- 新規登録 -->
   <div style="margin-top: 10px;">
-    <a href="<%= request.getContextPath() %>/disp/studentinsert.jsp">新規登録</a>
+    <a href="<%= request.getContextPath() %>/scoremanager/StudentInsert.action">新規登録</a>
   </div>
 
   <!-- 件数表示 -->

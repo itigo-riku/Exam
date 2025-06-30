@@ -8,7 +8,7 @@
   <h2 class="menu-title">学生新規登録</h2>
 
   <!-- 登録フォーム -->
-  <form action="studentinsert" method="post">
+  <form action="StudentInsert.action" method="post">
     <table>
       <tr>
         <td>学生番号：</td>
@@ -23,6 +23,8 @@
         <td>
           <select name="ent_year" required>
             <option value="">--選択--</option>
+            <c:out value="${entYears}" />
+
             <c:forEach var="year" items="${entYears}">
               <option value="${year}">${year}</option>
             </c:forEach>
@@ -34,6 +36,7 @@
         <td>
           <select name="class_no" required>
             <option value="">--選択--</option>
+            <c:out value="${classNums}" />
             <c:forEach var="cls" items="${classNums}">
               <option value="${cls}">${cls}</option>
             </c:forEach>

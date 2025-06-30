@@ -36,20 +36,6 @@ public class StudentListAction extends Action {
         List<String> classNums = dao.getClassNums(schoolCd);
         List<Map<String, Object>> students = dao.filterStudents(schoolCd, entYear, classNo, isAttend);
 
-        // デバッグ出力（サーバーコンソール）
-        System.out.println("---- entYears ----");
-        for (Integer y : entYears) System.out.println("入学年度: " + y);
-        System.out.println("→ 件数: " + entYears.size());
-
-        System.out.println("---- classNums ----");
-        for (String c : classNums) System.out.println("クラス: " + c);
-        System.out.println("→ 件数: " + classNums.size());
-
-        System.out.println("---- students ----");
-        for (Map<String, Object> s : students) {
-            System.out.println("学生番号: " + s.get("no") + ", 氏名: " + s.get("name"));
-        }
-        System.out.println("→ 件数: " + students.size());
 
 
         request.setAttribute("entYears", entYears);

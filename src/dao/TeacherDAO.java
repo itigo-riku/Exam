@@ -6,33 +6,30 @@ import java.sql.ResultSet;
 
 import bean.Teacher;
 
-public class TeacherDAO extends DAO {
+public class TeacherDAO extends DAO{
+	public Teacher search(String id, String password)
+	throws Exception{
+		Teacher teacher=null;
 
-	public Teacher search(String id, String password) throws Exception {
-		Teacher teacher = null;
-
-		Connection con = getConnection();
+		Connection con =getConnection();
 
 		PreparedStatement st;
-		st = con.prepareStatement(
-			"SELECT * FROM teacher WHERE id=? AND password=?"
-		);
+		st=con.prepareStatement("select * from teacher where id=? and password=?");
 		st.setString(1, id);
-		st.setString(2, password);
+		st.setString(2,  password);
 
-		ResultSet rs = st.executeQuery();
-		if (rs.next()) {
-			teacher = new Teacher();
+		ResultSet rs=st.executeQuery();
+
+		while(rs.next()){
+			teacher=new Teacher();
 			teacher.setId(rs.getString("id"));
+			/*teacher.setLogin(rs.getString("login"));*/
 			teacher.setPassword(rs.getString("password"));
 			teacher.setName(rs.getString("name"));
-			teacher.setSchool_cd(rs.getString("school_cd")); // ← 追加
+			teacher.setSchool(rs.getString("school_cd"));
 		}
-
-		rs.close();
 		st.close();
 		con.close();
-
 		return teacher;
 	}
 }

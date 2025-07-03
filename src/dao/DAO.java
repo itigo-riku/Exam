@@ -10,7 +10,7 @@ public class DAO{
 	public Connection getConnection() throws Exception{
 		if(ds==null){
 			InitialContext ic=new InitialContext();
-			ds=(DataSource)ic.lookup("java:/comp/env/jdbc/Java");
+			ds=(DataSource)ic.lookup("java:/comp/env/jdbc/java");
 		}
 		return ds.getConnection();
 	}

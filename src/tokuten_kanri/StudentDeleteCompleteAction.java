@@ -1,1 +1,0 @@
-package tokuten_kanri;

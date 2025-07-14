@@ -60,10 +60,7 @@
             <td>${t.studentName}</td>
             <td>
               <input type="hidden" name="student_no" value="${t.studentNo}" />
-              <!-- null対策をした修正済みの点数入力欄 -->
-              <input type="number" name="point"
-                     value="${t.point != null ? t.point : ''}"
-                     min="0" max="100" required/>
+              <input type="number" name="point" value="${t.point}" min="0" max="100" required/>
             </td>
           </tr>
         </c:forEach>

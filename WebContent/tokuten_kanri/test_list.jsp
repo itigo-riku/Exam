@@ -36,7 +36,6 @@
 }
 </style>
 
-
 	<section class="main-section">
 	  <h2 class="title">成績参照</h2>
 

@@ -230,3 +230,6 @@ table a:hover {
 .form-button:hover {
   background-color: #91c4f2;
 }
+.col-2.d-flex.align-items-center {
+  justify-content: flex-start !important;
+}

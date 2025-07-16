@@ -1,6 +1,61 @@
+<!-- スタイル追加 -->
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="base.jsp" %>
+
+<style>
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  padding: 15px;
+  background: #fdfdfd;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-group label {
+  white-space: nowrap;
+}
+
+.form-container select,
+.form-container input[type="number"] {
+  padding: 4px 8px;
+  font-size: 14px;
+  width: 140px;
+  box-sizing: border-box;
+}
+
+.form-container button {
+  padding: 5px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+/*ボタンの位置を変更したり見た目を変える*/
+.submit {
+  background-color: #007bff
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #007bff
+}
+</style>
+
 
 <section style="flex:1;">
   <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4" style="text-align:center;">成績登録</h2>
@@ -10,41 +65,36 @@
   </c:if>
 
   <!-- 条件フォーム -->
-  <form method="get" action="TestRegist.action" class="px-4">
+	<!-- 条件フォーム全体 -->
+<form method="get" action="TestRegist.action" class="form-container" style="flex-wrap: wrap; justify-content: center;">
+  <div class="form-group">
     <label>入学年度:</label>
-    <select name="ent_year" required>
-      <option value="">選択してください</option>
-      <c:forEach var="y" items="${entYears}">
-        <option value="${y}" <c:if test="${y == selectedEntYear}">selected</c:if>>${y}</option>
-      </c:forEach>
-    </select>
-
+    <select name="ent_year" required> ... </select>
+  </div>
+  <div class="form-group">
     <label>クラス番号:</label>
-    <select name="class_num" required>
-      <option value="">選択してください</option>
-      <c:forEach var="c" items="${classNums}">
-        <option value="${c}" <c:if test="${c == selectedClassNum}">selected</c:if>>${c}</option>
-      </c:forEach>
-    </select>
-
+    <select name="class_num" required> ... </select>
+  </div>
+  <div class="form-group">
     <label>科目:</label>
-    <select name="subject_cd" required>
-      <option value="">選択してください</option>
-      <c:forEach var="s" items="${subjects}">
-        <option value="${s.cd}" <c:if test="${s.cd == selectedSubjectCd}">selected</c:if>>${s.name}</option>
-      </c:forEach>
-    </select>
-
+    <select name="subject_cd" required> ... </select>
+  </div>
+  <div class="form-group">
     <label>回数:</label>
-    <input type="number" name="no" value="${selectedNo}" min="1" style="width:60px;" required/>
+    <input type="number" name="no" value="${selectedNo}" min="1" required/>
+  </div>
 
-    <button type="submit">検索</button>
-  </form>
+  <!--  ボタンを別行にして中央配置にする -->
+  <div style="width: 100%; text-align: center; margin-top: 10px;">
+    <button type="submit" class="submit">検索</button>
+  </div>
+</form>
 
-  <!-- 検索結果テーブル -->
+
+  <!-- 結果表示 -->
   <c:if test="${not empty testList}">
-    <form action="TestRegistDone.action" method="post" class="px-4" style="margin-top:20px;">
-      <table border="1" cellpadding="5" cellspacing="0" style="width:100%; text-align:center;">
+    <form action="TestRegistDone.action" method="post" class="px-4">
+      <table class="result-table">
         <tr>
           <th>入学年度</th>
           <th>クラス番号</th>
@@ -60,16 +110,13 @@
             <td>${t.studentName}</td>
             <td>
               <input type="hidden" name="student_no" value="${t.studentNo}" />
-              <!-- null対策をした修正済みの点数入力欄 -->
-              <input type="number" name="point"
-                     value="${t.point != null ? t.point : ''}"
-                     min="0" max="100" required/>
+              <input type="number" name="point" value="${t.point != null ? t.point : ''}" min="0" max="100" required/>
             </td>
           </tr>
         </c:forEach>
       </table>
 
-      <!-- 条件も一緒に送る -->
+      <!-- 条件保持 -->
       <input type="hidden" name="subject_cd" value="${selectedSubjectCd}"/>
       <input type="hidden" name="no" value="${selectedNo}"/>
       <input type="hidden" name="class_num" value="${selectedClassNum}"/>
@@ -79,7 +126,6 @@
       </div>
     </form>
   </c:if>
-
 </section>
 
 <%@ include file="../footer.html" %>

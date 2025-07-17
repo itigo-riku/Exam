@@ -83,15 +83,16 @@
         </select>
       </div>
 
-		<!-- これは在学中の所のチェックボックスの配置・サイズなど決めるところ-->
-	<div class="col-2 d-flex align-items-center justify-content-start">
-		<label for="student-f3-check" class="mb-0 me-2">在学中</label>
-	 	<input type="checkbox" class="form-check-input" id="student-f3-check" name="f3" value="t"
-		  <c:if test="${f3 == 't'}">checked</c:if> />
-	</div>
-
-
-
+		<!-- 在学中 チェックボックス 横並び -->
+		<div class="col-auto">
+		  <div style="display: inline-flex; align-items: center;">
+		    <label for="student-f3-check" style="margin: 0 4px 0 0; white-space: nowrap; font-size: 1rem;">在学中</label>
+		    <input type="checkbox" id="student-f3-check" name="f3" value="t"
+		      style="margin: 0; vertical-align: middle; transform: translateY(-1px);"
+		      <c:if test="${f3 == 't'}">checked</c:if> />
+		  </div>
+		</div>
+	  <!-- ここは絞り込みの検索ボックス表示 -->
       <div class="col-2 text-center">
         <button class="btn btn-secondary" id="filter-button">絞り込み</button>
       </div>
@@ -110,7 +111,7 @@
             <th>学生番号</th>
             <th>氏名</th>
             <th>クラス</th>
-            <th class="text-center">在学中</th>
+            <th>在学中</th>
             <th></th>
             <th></th>
           </tr>
